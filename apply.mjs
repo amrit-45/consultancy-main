@@ -57,9 +57,14 @@ app.get('/admin', (req, res) => {
     res.render('admin', { applications, contacts });
 });
 
-// Login route
+// Login route (simple demo, replace with a secure method)
 app.get('/login', (req, res) => {
-    res.render('login'); // Render the login EJS page
+    res.send(`
+        <form action="/login" method="POST">
+            <input type="password" name="password" placeholder="Enter password" required>
+            <button type="submit">Login</button>
+        </form>
+    `);
 });
 
 // Secure login handler
@@ -73,6 +78,19 @@ app.post('/login', async (req, res) => {
     } else {
         res.send('Invalid password');
     }
+});
+
+// Route to serve the reviews page
+app.get('/reviews', (req, res) => {
+    res.render('reviews'); // Ensure this points to your 'reviews.ejs' file
+});
+
+// Route to handle review submission
+app.post('/submit-review', (req, res) => {
+    const { name, email, rating, review } = req.body;
+    // Here, you would typically save the review to your database
+    console.log({ name, email, rating, review }); // For now, we log it to the console
+    res.redirect('/reviews'); // Redirect to a page to show reviews or a thank-you page
 });
 
 // Start server
