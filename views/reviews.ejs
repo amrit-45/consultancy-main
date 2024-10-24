@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./reviews.css"> <!-- Link your CSS file -->
-    <title>Leave a Review</title>
+    <title>User Reviews</title>
 </head>
 <body>
     <div class="container">
@@ -35,6 +35,27 @@
             </div>
             <button type="submit" class="submit-btn">Submit Review</button>
         </form>
+
+        <h2>All Reviews:</h2>
+        <div id="reviews">
+            <% reviews.forEach(review => { %>
+                <div class="review-card">
+                    <h3><%= review.name %> - <span class="rating"><%= review.rating %> ⭐</span></h3>
+                    <p><%= review.review %></p>
+                    <button class="comment-btn" data-review="<%= review.review %>">Comment</button>
+                </div>
+            <% }); %>
+        </div>
     </div>
+
+    <script>
+        const commentButtons = document.querySelectorAll('.comment-btn');
+        commentButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const review = button.getAttribute('data-review');
+                alert(`Comment on this review: "${review}"`); // Placeholder for comment functionality
+            });
+        });
+    </script>
 </body>
 </html>

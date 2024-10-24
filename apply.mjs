@@ -23,6 +23,7 @@ app.use(session({
 // In-memory data storage (use a database in production)
 let applications = [];
 let contacts = [];
+let reviews = []; // Add reviews array to store review submissions
 
 // Store a hashed password (for initial setup, run once to generate)
 // Replace 'your_secure_password' with a secure password of your choice
@@ -57,6 +58,18 @@ app.get('/admin', (req, res) => {
     res.render('admin', { applications, contacts });
 });
 
+// Reviews Route
+app.get('/reviews', (req, res) => {
+    res.render('reviews', { reviews }); // Pass the reviews array to the EJS template
+});
+
+// Review Submission Route
+app.post('/submit-review', (req, res) => {
+    const { name, email, rating, review } = req.body;
+    reviews.push({ name, email, rating, review }); // Store the new review
+    res.redirect('/reviews'); // Redirect to the reviews page
+});
+
 // Login route (simple demo, replace with a secure method)
 app.get('/login', (req, res) => {
     res.send(`
@@ -80,20 +93,8 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Route to serve the reviews page
-app.get('/reviews', (req, res) => {
-    res.render('reviews'); // Ensure this points to your 'reviews.ejs' file
-});
-
-// Route to handle review submission
-app.post('/submit-review', (req, res) => {
-    const { name, email, rating, review } = req.body;
-    // Here, you would typically save the review to your database
-    console.log({ name, email, rating, review }); // For now, we log it to the console
-    res.redirect('/reviews'); // Redirect to a page to show reviews or a thank-you page
-});
-
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
