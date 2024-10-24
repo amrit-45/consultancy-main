@@ -9,13 +9,13 @@ const PORT = 8000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.resolve())); // Serve static files
+app.use(express.static(path.resolve())); // Serve static files from the public folder
 app.set('view engine', 'ejs'); // Set EJS as the templating engine
 app.set('views', path.join(process.cwd(), 'views')); // Set the views directory
 
 // Session setup for admin panel authentication
 app.use(session({
-    secret: 'admin', // Change to a secure secret key
+    secret: 'your_super_secret_key', // Change to a secure secret key
     resave: false,
     saveUninitialized: true,
 }));
@@ -70,14 +70,9 @@ app.post('/submit-review', (req, res) => {
     res.redirect('/reviews'); // Redirect to the reviews page
 });
 
-// Login route (simple demo, replace with a secure method)
+// Login route
 app.get('/login', (req, res) => {
-    res.send(`
-        <form action="/login" method="POST">
-            <input type="password" name="password" placeholder="Enter password" required>
-            <button type="submit">Login</button>
-        </form>
-    `);
+    res.render('login'); // Render the login.ejs file
 });
 
 // Secure login handler
@@ -97,4 +92,3 @@ app.post('/login', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-
