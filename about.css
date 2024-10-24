@@ -61,7 +61,7 @@ body {
 
 /* Hero Section */
 .about-hero {
-    background-image: url('https://example.com/hero-bg.jpg'); /* Use a relevant background image */
+    background-image: url('img/educationalcontent.jpg'); /* Use a relevant background image */
     background-size: cover;
     background-position: center;
     height: 80vh;
@@ -71,6 +71,7 @@ body {
     align-items: center;
     color: #fff;
     text-align: center;
+    height: 100vh;
 }
 
 .about-hero .overlay {

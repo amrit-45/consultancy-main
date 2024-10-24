@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const app = express();
 const PORT = 8000;
@@ -15,7 +15,7 @@ app.set('views', path.join(process.cwd(), 'views')); // Set the views directory
 
 // Session setup for admin panel authentication
 app.use(session({
-    secret: 'your_secret_key', // Change to a secure secret key
+    secret: 'admin', // Change to a secure secret key
     resave: false,
     saveUninitialized: true,
 }));
@@ -57,14 +57,9 @@ app.get('/admin', (req, res) => {
     res.render('admin', { applications, contacts });
 });
 
-// Login route (simple demo, replace with a secure method)
+// Login route
 app.get('/login', (req, res) => {
-    res.send(`
-        <form action="/login" method="POST">
-            <input type="password" name="password" placeholder="Enter password" required>
-            <button type="submit">Login</button>
-        </form>
-    `);
+    res.render('login'); // Render the login EJS page
 });
 
 // Secure login handler
