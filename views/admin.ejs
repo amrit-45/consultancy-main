@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./serve.css"> <!-- Link to CSS -->
+    <title>Admin Panel</title>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Admin Panel</h2>
+        <h3>Applications</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="applicationTable">
+                <% applications.forEach(app => { %>
+                    <tr>
+                        <td><%= app.name %></td>
+                        <td><%= app.email %></td>
+                        <td><%= app.message %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <h3>Contact Messages</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="contactTable">
+                <% contacts.forEach(contact => { %>
+                    <tr>
+                        <td><%= contact.name %></td>
+                        <td><%= contact.email %></td>
+                        <td><%= contact.message %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script> <!-- Link to JavaScript -->
+</body>
+</html>
+
